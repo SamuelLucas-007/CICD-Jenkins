@@ -5,7 +5,7 @@ pipeline {
     stage('Build Image') {
       steps {
         script {
-          dockerapp = docker.build("shmullll/CICD-Jenkins:${env.BUILD_ID}", "-f ./src/Dockerfile ./src")
+          dockerapp = docker.build("shmullll/cicd-jenkins:${env.BUILD_ID}", "-f ./src/Dockerfile ./src")
         }
       }
     }
