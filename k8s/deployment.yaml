@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: shmullll/cicd-jenkins:{{tag}}
+        image: shmull/cicd-jenkins:{{tag}}
         ports:
         - containerPort: 8080
 ---
