@@ -33,9 +33,15 @@ pipeline {
           //   sh 'sed -i "s/{{tag}}/$tag_version/g" ./k8s/deployment.yaml'
           //   sh 'kubectl apply -f ./k8s/deployment.yaml'
           // }
+          sh 'kubectl config use-context default'
           sh 'sed -i "s/{{tag}}/$tag_version/g" ./k8s/deployment.yaml' // para substituir a tag no arquivo deployment.yaml
-          sh 'kubectl apply -f ./k8s/deployment.yaml' // para aplicar o deployment no k8s local
-
+          sh 'kubectl cluster-info'
+          sh 'cat ./k8s/deployment.yaml'
+          try {
+            sh 'kubectl apply -f ./k8s/deployment.yaml'
+          } catch (Exception e) {
+            error("Deployment failed: ${e.message}")
+          }
         }
       }
     }
